@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-background: #f5f8fc;
+  --color-surface: #ffffff;
+  --color-border: #dbe3ee;
+  --color-text: #0b1220;
+  --color-muted: #57647a;
+  --color-accent: #0e7490;
+  --color-accent-2: #2563eb;
+  --color-on-accent: #ffffff;
+  --color-danger: #dc2626;
+
+  --font-display: var(--font-share-tech-mono), ui-monospace, monospace;
+  --font-body: var(--font-fira-code), ui-monospace, monospace;
+}
+
+:root {
+  --cursor-glow-opacity: 0.85;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #020617;
+    --color-surface: #0e1223;
+    --color-border: #26314a;
+    --color-text: #f1f5f9;
+    --color-muted: #8b98ac;
+    --color-accent: #22d3ee;
+    --color-accent-2: #38bdf8;
+    --color-on-accent: #02131a;
+    --color-danger: #f87171;
+    --cursor-glow-opacity: 1;
+    --nav-pill-bg: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-accent) 22%, transparent),
+      transparent 75%
+    );
+    --nav-pill-border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    --nav-pill-underline-shadow:
+      0 0 8px 1px var(--color-accent), 0 0 18px 3px var(--color-accent);
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-background: #020617;
+  --color-surface: #0e1223;
+  --color-border: #26314a;
+  --color-text: #f1f5f9;
+  --color-muted: #8b98ac;
+  --color-accent: #22d3ee;
+  --color-accent-2: #38bdf8;
+  --color-on-accent: #02131a;
+    --color-danger: #f87171;
+  --cursor-glow-opacity: 1;
+  --nav-pill-bg: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-accent) 22%, transparent),
+    transparent 75%
+  );
+  --nav-pill-border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  --nav-pill-underline-shadow:
+    0 0 8px 1px var(--color-accent), 0 0 18px 3px var(--color-accent);
+}
+
+:root[data-theme='light'] {
+  --color-background: #f5f8fc;
+  --color-surface: #ffffff;
+  --color-border: #dbe3ee;
+  --color-text: #0b1220;
+  --color-muted: #57647a;
+  --color-accent: #0e7490;
+  --color-accent-2: #2563eb;
+  --color-on-accent: #ffffff;
+  --color-danger: #dc2626;
+  --cursor-glow-opacity: 0.85;
+  --nav-pill-bg: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-accent) 16%, transparent),
+    transparent 70%
+  );
+  --nav-pill-border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  --nav-pill-underline-shadow: 0 1px 2px 0 color-mix(in srgb, var(--color-accent) 70%, transparent);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}

@@ -48,7 +48,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    label: 'Core Knowledge',
+    label: 'Core Engineering',
     skills: [
       { name: 'OOP' },
       { name: 'Data Structures & Algorithms' },

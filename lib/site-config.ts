@@ -1,12 +1,9 @@
 export const siteConfig = {
   name: 'Pham Tran Quoc',
-  shortName: 'PTQ',
   navLinks: [
-    { label: 'Home', href: '#home' },
+    { label: 'Work', href: '#projects' },
     { label: 'About', href: '#about' },
     { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Education', href: '#education' },
     { label: 'Contact', href: '#contact' },
   ],
   socialLinks: {
@@ -23,6 +20,6 @@ export const siteConfig = {
     major: 'Software Engineering',
     gpa: '3.35/4.0',
     educationPeriod: 'September 2023 – June 2027 (Expected)',
-    motto: 'Building full-stack software and exploring Applied AI.',
+    motto: 'Turning complex problems into practical software.',
   },
 } as const;

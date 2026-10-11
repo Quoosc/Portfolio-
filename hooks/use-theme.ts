@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'theme';
+const THEME_TRANSITION_MS = 550;
 
 function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;
@@ -27,9 +28,20 @@ export function useTheme() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const supportsViewTransition = typeof document.startViewTransition === 'function';
 
-    if (!supportsViewTransition || !origin || reduceMotion) {
+    if (reduceMotion) {
       applyTheme(next);
       setTheme(next);
+      return;
+    }
+
+    if (!supportsViewTransition || !origin) {
+      const root = document.documentElement;
+      root.classList.add('theme-color-transition');
+      window.requestAnimationFrame(() => {
+        applyTheme(next);
+        setTheme(next);
+        window.setTimeout(() => root.classList.remove('theme-color-transition'), THEME_TRANSITION_MS);
+      });
       return;
     }
 
@@ -52,12 +64,12 @@ export function useTheme() {
           ],
         },
         {
-          duration: 550,
+          duration: THEME_TRANSITION_MS,
           easing: 'ease-in-out',
           pseudoElement: '::view-transition-new(root)',
         },
       );
-    });
+    }).catch(() => undefined);
   }, []);
 
   return { theme, toggleTheme };

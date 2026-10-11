@@ -6,12 +6,11 @@ import { scrollToSection } from '@/lib/utils';
 type Variant = 'primary' | 'secondary';
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-display text-xs uppercase tracking-wider transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50';
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50';
 
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-accent text-on-accent shadow-[0_0_20px_-6px_var(--color-accent)] hover:shadow-[0_0_28px_-4px_var(--color-accent)] hover:brightness-110',
-  secondary: 'border border-border text-text hover:border-accent hover:text-accent',
+  primary: 'bg-accent text-on-accent hover:bg-accent/90',
+  secondary: 'border border-border bg-surface text-text hover:border-accent/70 hover:text-accent',
 };
 
 type ButtonAsLink = ComponentPropsWithoutRef<'a'> & {
@@ -34,12 +33,12 @@ export function Button({ variant = 'primary', className = '', ...props }: Button
     return (
       <a
         href={href}
-        onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+        onClick={(event: MouseEvent<HTMLAnchorElement>) => {
           if (isSectionLink) {
-            e.preventDefault();
+            event.preventDefault();
             scrollToSection(href.slice(1));
           }
-          onClick?.(e);
+          onClick?.(event);
         }}
         {...rest}
         className={classes}
@@ -47,5 +46,11 @@ export function Button({ variant = 'primary', className = '', ...props }: Button
     );
   }
 
-  return <button type="button" {...(props as ComponentPropsWithoutRef<'button'>)} className={`${classes} cursor-pointer`} />;
+  return (
+    <button
+      type="button"
+      {...(props as ComponentPropsWithoutRef<'button'>)}
+      className={`${classes} cursor-pointer`}
+    />
+  );
 }

@@ -26,6 +26,8 @@
   --nav-active-bg: rgb(120 178 245 / 12%);
   --nav-active-border: rgb(120 178 245 / 28%);
   --focus-ring: #a7ccff;
+  --technology-nextjs-color: #f3f4f6;
+  --technology-github-color: #f0f6fc;
 }
 
 :root[data-theme='dark'] {
@@ -46,6 +48,8 @@
   --nav-active-bg: rgb(120 178 245 / 12%);
   --nav-active-border: rgb(120 178 245 / 28%);
   --focus-ring: #a7ccff;
+  --technology-nextjs-color: #f3f4f6;
+  --technology-github-color: #f0f6fc;
 }
 
 :root[data-theme='light'] {
@@ -66,6 +70,8 @@
   --nav-active-bg: rgb(32 95 184 / 9%);
   --nav-active-border: rgb(32 95 184 / 22%);
   --focus-ring: #205fb8;
+  --technology-nextjs-color: #111827;
+  --technology-github-color: #24292f;
 }
 
 * {
@@ -102,6 +108,36 @@ html.theme-color-transition body * {
     fill 550ms ease-in-out,
     stroke 550ms ease-in-out,
     box-shadow 550ms ease-in-out !important;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+.technology-badge {
+  border: 1px solid color-mix(in srgb, var(--technology-color) 48%, var(--color-border));
+  background-color: color-mix(in srgb, var(--technology-color) 13%, var(--color-elevated));
+  color: var(--color-text);
+}
+
+.technology-badge:hover {
+  border-color: color-mix(in srgb, var(--technology-color) 72%, var(--color-border));
+  background-color: color-mix(in srgb, var(--technology-color) 20%, var(--color-elevated));
+}
+
+.technology-badge__icon {
+  flex-shrink: 0;
+  color: var(--technology-color);
 }
 
 :focus-visible {

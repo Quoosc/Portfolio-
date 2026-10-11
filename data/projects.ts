@@ -7,6 +7,7 @@ import {
   SiReact,
   SiTailwindcss,
 } from 'react-icons/si';
+import { technologyColors } from '@/data/technology-colors';
 
 export type ProjectImage = { src: string; alt: string; caption?: string };
 
@@ -22,7 +23,7 @@ export type Project = {
   images: ProjectImage[];
   liveUrl: string;
   githubLinks: Array<{ label: string; url: string }>;
-  techStack: Array<{ name: string; icon?: IconType }>;
+  techStack: Array<{ name: string; icon?: IconType; color?: string }>;
   keyFeatures: string[];
   highlights: Array<{ title: string; description: string }>;
   challenge: { title: string; description: string };
@@ -48,13 +49,13 @@ export const projects: Project[] = [
       { label: 'Backend', url: 'https://github.com/Quoosc/movie-booking-backend' },
     ],
     techStack: [
-      { name: 'ReactJS', icon: SiReact },
-      { name: 'JavaScript', icon: SiJavascript },
-      { name: 'Tailwind CSS', icon: SiTailwindcss },
-      { name: 'PHP Laravel', icon: SiLaravel },
-      { name: 'MySQL', icon: SiMysql },
-      { name: 'RESTful API' },
-      { name: 'Git', icon: SiGit },
+      { name: 'ReactJS', icon: SiReact, color: technologyColors.ReactJS },
+      { name: 'JavaScript', icon: SiJavascript, color: technologyColors.JavaScript },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: technologyColors['Tailwind CSS'] },
+      { name: 'PHP Laravel', icon: SiLaravel, color: technologyColors.Laravel },
+      { name: 'MySQL', icon: SiMysql, color: technologyColors.MySQL },
+      { name: 'RESTful API', color: technologyColors['RESTful API'] },
+      { name: 'Git', icon: SiGit, color: technologyColors.Git },
     ],
     keyFeatures: [
       'Customer-facing and admin interfaces.',

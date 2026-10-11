@@ -9,6 +9,7 @@ import { ArchitectureDiagram } from '@/components/projects/ArchitectureDiagram';
 import { ProjectPreview } from '@/components/projects/ProjectPreview';
 import { ProjectScreenshot } from '@/components/sections/ProjectScreenshot';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { TechnologyBadge } from '@/components/ui/TechnologyBadge';
 import { projects } from '@/data/projects';
 
 export function CineonCaseStudy() {
@@ -159,18 +160,9 @@ export function CineonCaseStudy() {
       <section className="grid gap-10 border-b border-border py-14 sm:py-16 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
         <SectionHeading eyebrow="Technology" title="Tools used to build Cineon." />
         <ul className="flex flex-wrap content-start gap-2">
-          {project.techStack.map((technology) => {
-            const Icon = technology.icon;
-            return (
-              <li
-                key={technology.name}
-                className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text"
-              >
-                {Icon && <Icon size={15} aria-hidden="true" className="text-accent" />}
-                {technology.name}
-              </li>
-            );
-          })}
+          {project.techStack.map((technology) => (
+            <TechnologyBadge key={technology.name} {...technology} />
+          ))}
         </ul>
       </section>
 

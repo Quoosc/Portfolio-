@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRightIcon, GithubLogoIcon } from '@phosphor-icons/react/dist/ssr';
 import { FadeIn } from '@/components/ui/FadeIn';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { TechnologyBadge } from '@/components/ui/TechnologyBadge';
 import { ProjectPreview } from '@/components/projects/ProjectPreview';
 import { projects } from '@/data/projects';
 
@@ -106,18 +107,9 @@ export function Projects() {
                 Technology
               </h4>
               <ul className="mt-5 flex flex-wrap gap-2">
-                {project.techStack.map((technology) => {
-                  const Icon = technology.icon;
-                  return (
-                    <li
-                      key={technology.name}
-                      className="inline-flex min-h-9 items-center gap-2 rounded-lg border border-border bg-elevated px-3 py-1.5 text-sm text-text"
-                    >
-                      {Icon && <Icon size={15} aria-hidden="true" className="text-accent" />}
-                      {technology.name}
-                    </li>
-                  );
-                })}
+                {project.techStack.map((technology) => (
+                  <TechnologyBadge key={technology.name} {...technology} />
+                ))}
               </ul>
             </div>
           </div>

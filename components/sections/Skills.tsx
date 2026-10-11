@@ -1,5 +1,6 @@
 import { FadeIn } from '@/components/ui/FadeIn';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { TechnologyBadge } from '@/components/ui/TechnologyBadge';
 import { skillCategories } from '@/data/skills';
 
 export function Skills() {
@@ -23,18 +24,9 @@ export function Skills() {
                   <h3 className="text-base font-semibold text-text">{category.label}</h3>
                 </div>
                 <ul className="mt-5 flex flex-wrap gap-2">
-                  {category.skills.map((skill) => {
-                    const Icon = skill.icon;
-                    return (
-                      <li
-                        key={skill.name}
-                        className="inline-flex min-h-9 items-center gap-2 rounded-lg border border-border bg-elevated px-3 py-2 text-sm text-text transition-colors hover:border-accent/60"
-                      >
-                        {Icon && <Icon size={15} aria-hidden="true" className="text-accent" />}
-                        {skill.name}
-                      </li>
-                    );
-                  })}
+                  {category.skills.map((skill) => (
+                    <TechnologyBadge key={skill.name} {...skill} />
+                  ))}
                 </ul>
               </article>
             </FadeIn>

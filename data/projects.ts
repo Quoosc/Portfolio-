@@ -42,7 +42,48 @@ export const projects: Project[] = [
       'A movie booking platform with customer-facing and admin interfaces for movie management, showtime scheduling, ticket booking, payments, and user authorization.',
     period: '2025 – 2026',
     role: 'Full-stack Developer',
-    images: [],
+    images: [
+      {
+        src: '/cineon/screenshots/01-home.png',
+        alt: 'Cineon home page with featured banner and currently showing movies',
+        caption: 'Movie discovery and home page',
+      },
+      {
+        src: '/cineon/screenshots/02-movie-detail.png',
+        alt: 'Cineon movie detail page with synopsis, cast, and showtimes',
+        caption: 'Movie details and showtimes',
+      },
+      {
+        src: '/cineon/screenshots/03-movie-reviews.png',
+        alt: 'Cineon movie reviews with ratings and review filters',
+        caption: 'Movie reviews and comments',
+      },
+      {
+        src: '/cineon/screenshots/04-seat-selection.png',
+        alt: 'Cineon seat selection screen with seat map and legend',
+        caption: 'Interactive seat selection',
+      },
+      {
+        src: '/cineon/screenshots/05-payment-methods.png',
+        alt: 'Cineon checkout page with payment methods and booking summary',
+        caption: 'Checkout and payment methods',
+      },
+      {
+        src: '/cineon/screenshots/06-ticket-qr.png',
+        alt: 'Cineon confirmed movie ticket with demo QR code and booking details',
+        caption: 'Successful booking and e-ticket QR',
+      },
+      {
+        src: '/cineon/screenshots/07-admin-movies.png',
+        alt: 'Cineon admin movie management dashboard',
+        caption: 'Admin movie management',
+      },
+      {
+        src: '/cineon/screenshots/08-admin-promotions.png',
+        alt: 'Cineon admin promotions and discounts dashboard',
+        caption: 'Admin promotions and discounts',
+      },
+    ],
     liveUrl: 'https://cineon-cinema.vercel.app/',
     githubLinks: [
       { label: 'Frontend', url: 'https://github.com/Quoosc/movie-booking-frontend' },

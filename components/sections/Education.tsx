@@ -5,7 +5,7 @@ export function Education() {
   return (
     <section
       id="education"
-      className="mx-auto flex border-t border-border/60 max-w-6xl scroll-mt-16 items-center px-4 py-16 sm:px-6 md:min-h-[calc(100vh-4rem)] md:py-10"
+      className="mx-auto flex max-w-6xl scroll-mt-16 items-center border-t border-border/60 px-4 py-20 sm:px-6 md:py-24"
     >
       <div className="w-full">
         <FadeIn delay={0}>
@@ -21,7 +21,7 @@ export function Education() {
         </FadeIn>
 
         <FadeIn delay={0.16}>
-          <article className="mt-8 rounded-2xl border border-border/60 bg-surface/60 p-6 shadow-[0_0_30px_-14px_var(--color-accent)] backdrop-blur-md sm:p-8">
+          <article className="mt-8 rounded-2xl border border-border bg-surface p-6 sm:p-8">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <h3 className="font-display text-lg font-bold text-text">

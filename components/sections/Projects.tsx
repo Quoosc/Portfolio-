@@ -10,7 +10,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="mx-auto max-w-6xl scroll-mt-16 border-t border-border/60 px-4 py-16 sm:px-6 md:py-10"
+      className="mx-auto max-w-6xl scroll-mt-16 border-t border-border/60 px-4 py-20 sm:px-6 md:py-24"
     >
       <FadeIn delay={0}>
         <span className="inline-block rounded-full border border-accent px-3 py-1 font-display text-[11px] uppercase tracking-wider text-accent">
@@ -24,8 +24,9 @@ export function Projects() {
         </h2>
       </FadeIn>
 
+      <article className="mt-10 rounded-3xl border border-border bg-surface p-6 sm:p-8 lg:p-10">
       <div
-        className={`mt-10 grid gap-8 ${project.images.length > 0 ? 'md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:items-start md:gap-12' : ''}`}
+        className={`grid gap-8 ${project.images.length > 0 ? 'md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:items-start md:gap-12' : ''}`}
       >
         <div>
           <FadeIn delay={0.16}>
@@ -73,7 +74,7 @@ export function Projects() {
         )}
       </div>
 
-      <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-16">
+      <div className="mt-10 grid gap-10 border-t border-border pt-8 md:grid-cols-2 md:gap-16">
         <FadeIn delay={0.16}>
           <h4 className="font-display text-xs uppercase tracking-wider text-muted">Tech Stack</h4>
           <ul className="mt-3 flex flex-wrap gap-2">
@@ -110,6 +111,7 @@ export function Projects() {
           </ul>
         </FadeIn>
       </div>
+      </article>
     </section>
   );
 }

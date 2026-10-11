@@ -5,7 +5,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="mx-auto flex border-t border-border/60 max-w-6xl scroll-mt-16 items-center px-4 py-16 sm:px-6 md:min-h-[calc(100vh-4rem)] md:py-10"
+      className="mx-auto flex max-w-6xl scroll-mt-16 items-center border-t border-border/60 px-4 py-20 sm:px-6 md:py-24"
     >
       <div className="grid w-full items-start gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:gap-10">
         <div>
@@ -41,7 +41,7 @@ export function Skills() {
                   return (
                     <div
                       key={skill.name}
-                      className="flex min-h-20 flex-col items-center justify-center gap-1.5 rounded-xl border border-border/60 bg-surface/60 px-3 py-3 text-center shadow-[0_0_20px_-12px_var(--color-accent)] backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:shadow-[0_0_24px_-8px_var(--color-accent)]"
+                      className="flex min-h-20 flex-col items-center justify-center gap-1.5 rounded-xl border border-border bg-surface px-3 py-3 text-center transition-colors duration-200 hover:border-accent/60"
                     >
                       {Icon && <Icon size={24} color="var(--color-accent)" aria-hidden="true" />}
                       <span className="text-xs text-text">{skill.name}</span>

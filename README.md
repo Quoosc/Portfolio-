@@ -19,22 +19,18 @@
 
 [https://quoc-portfolio-roan.vercel.app/](https://quoc-portfolio-roan.vercel.app/)
 
-## Portfolio Preview
-
-A screenshot of the deployed portfolio is not currently included in this repository. A preview image can be added as `public/portfolio-preview.png` after approval.
-
 ## About Me
 
 I'm a final-year Software Engineering student at the University of Information Technology – VNU-HCM, with a GPA of 3.35/4.0. My background includes programming and building practical full-stack applications, including a movie booking platform with booking workflows and RESTful API integration. I'm interested in applying my problem-solving skills to useful software and exploring practical applications of AI. I continue to develop my technical foundation through hands-on projects and academic work, with a focus on growing as a software engineer and contributing to future Applied AI initiatives.
 
 ## Technical Skills
 
-| Area | Skills |
-| --- | --- |
-| **Programming Languages** | Python · JavaScript · PHP · TypeScript |
-| **Frameworks & Technologies** | ReactJS · Next.js · Laravel · Tailwind CSS · MySQL |
-| **Core Knowledge** | OOP · Data Structures & Algorithms · RESTful API |
-| **AI & Development Tools** | Claude · GitHub Copilot · Codex · Git · GitHub · Postman |
+| Area                          | Skills                                                   |
+| ----------------------------- | -------------------------------------------------------- |
+| **Programming Languages**     | Python · JavaScript · PHP · TypeScript                   |
+| **Frameworks & Technologies** | ReactJS · Next.js · Laravel · Tailwind CSS · MySQL       |
+| **Core Knowledge**            | OOP · Data Structures & Algorithms · RESTful API         |
+| **AI & Development Tools**    | Claude · GitHub Copilot · Codex · Git · GitHub · Postman |
 
 ## Featured Project
 
@@ -60,5 +56,5 @@ GPA: **3.35/4.0**
 - **Email:** [phamquoc896@gmail.com](mailto:phamquoc896@gmail.com)
 - **GitHub:** [github.com/Quoosc](https://github.com/Quoosc)
 - **Portfolio:** [quoc-portfolio-roan.vercel.app](https://quoc-portfolio-roan.vercel.app/)
-- **Resume:** [View or download PDF](public/pham-tran-quoc-cv.pdf)
+- **Resume:** [View or download PDF](https://quoc-portfolio-roan.vercel.app/pham-tran-quoc-cv.pdf)
 - **Location:** Ho Chi Minh City, Vietnam

@@ -12,7 +12,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="mx-auto max-w-6xl scroll-mt-16 border-t border-border/60 px-4 py-16 sm:px-6 md:min-h-[calc(100vh-4rem)] md:py-10"
+      className="mx-auto max-w-6xl scroll-mt-16 border-t border-border/60 px-4 py-20 sm:px-6 md:py-24"
     >
       <div className="max-w-2xl">
         <FadeIn delay={0}>

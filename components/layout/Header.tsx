@@ -77,9 +77,11 @@ export function Header() {
                   >
                     {link.label}
                     {isActive && (
-                      <span
+                      <motion.span
                         aria-hidden="true"
+                        layoutId="desktop-active-navigation-indicator"
                         className="absolute inset-x-3 bottom-0 h-px bg-accent"
+                        transition={{ duration: 0.28, ease: 'easeInOut' }}
                       />
                     )}
                   </a>

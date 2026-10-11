@@ -6,36 +6,46 @@ export function useActiveSection(ids: readonly string[]) {
   const [activeId, setActiveId] = useState(ids[0] ?? '');
 
   useEffect(() => {
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (elements.length === 0) return;
+    let frame = 0;
 
-    const ratios = new Map<string, number>();
+    function updateActiveSection() {
+      frame = 0;
+      const scrollPadding =
+        Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 80;
+      const activationLine = window.scrollY + scrollPadding + 16;
+      let currentId = ids[0] ?? '';
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
-        }
+      for (const id of ids) {
+        const element = document.getElementById(id);
+        if (!element) continue;
 
-        let bestId = '';
-        let bestRatio = 0;
-        for (const [id, ratio] of ratios) {
-          if (ratio > bestRatio) {
-            bestRatio = ratio;
-            bestId = id;
-          }
-        }
-        if (bestId) {
-          setActiveId(bestId);
-        }
-      },
-      { rootMargin: '-64px 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
-    );
+        const scrollMargin = Number.parseFloat(getComputedStyle(element).scrollMarginTop) || 0;
+        const sectionTop = element.getBoundingClientRect().top + window.scrollY - scrollMargin;
+        if (sectionTop <= activationLine) currentId = id;
+        else break;
+      }
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+      if (currentId) setActiveId(currentId);
+    }
+
+    function scheduleUpdate() {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateActiveSection);
+    }
+
+    scheduleUpdate();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('hashchange', scheduleUpdate);
+    window.addEventListener('popstate', scheduleUpdate);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.removeEventListener('hashchange', scheduleUpdate);
+      window.removeEventListener('popstate', scheduleUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [ids]);
 
   return activeId;

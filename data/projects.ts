@@ -9,7 +9,7 @@ import {
 } from 'react-icons/si';
 import { technologyColors } from '@/data/technology-colors';
 
-export type ProjectImage = { src: string; alt: string; caption?: string };
+export type ProjectImage = { src: string; thumbnail?: string; alt: string; caption?: string };
 
 export type Project = {
   slug: string;
@@ -44,42 +44,50 @@ export const projects: Project[] = [
     role: 'Full-stack Developer',
     images: [
       {
-        src: '/cineon/screenshots/01-home.png',
+        src: '/cineon/screenshots/01-home.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/01-home.webp',
         alt: 'Cineon home page with featured banner and currently showing movies',
         caption: 'Movie discovery and home page',
       },
       {
-        src: '/cineon/screenshots/02-movie-detail.png',
+        src: '/cineon/screenshots/02-movie-detail.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/02-movie-detail.webp',
         alt: 'Cineon movie detail page with synopsis, cast, and showtimes',
         caption: 'Movie details and showtimes',
       },
       {
-        src: '/cineon/screenshots/03-movie-reviews.png',
-        alt: 'Cineon movie reviews with ratings and review filters',
-        caption: 'Movie reviews and comments',
-      },
-      {
-        src: '/cineon/screenshots/04-seat-selection.png',
+        src: '/cineon/screenshots/04-seat-selection.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/04-seat-selection.webp',
         alt: 'Cineon seat selection screen with seat map and legend',
         caption: 'Interactive seat selection',
       },
       {
-        src: '/cineon/screenshots/05-payment-methods.png',
+        src: '/cineon/screenshots/05-payment-methods.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/05-payment-methods.webp',
         alt: 'Cineon checkout page with payment methods and booking summary',
         caption: 'Checkout and payment methods',
       },
       {
-        src: '/cineon/screenshots/06-ticket-qr.png',
+        src: '/cineon/screenshots/06-ticket-qr.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/06-ticket-qr.webp',
         alt: 'Cineon confirmed movie ticket with demo QR code and booking details',
         caption: 'Successful booking and e-ticket QR',
       },
       {
-        src: '/cineon/screenshots/07-admin-movies.png',
+        src: '/cineon/screenshots/07-admin-movies.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/07-admin-movies.webp',
         alt: 'Cineon admin movie management dashboard',
         caption: 'Admin movie management',
       },
       {
-        src: '/cineon/screenshots/08-admin-promotions.png',
+        src: '/cineon/screenshots/03-movie-reviews.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/03-movie-reviews.webp',
+        alt: 'Cineon movie reviews with ratings and review filters',
+        caption: 'Movie reviews and comments',
+      },
+      {
+        src: '/cineon/screenshots/08-admin-promotions.webp',
+        thumbnail: '/cineon/screenshots/thumbnails/08-admin-promotions.webp',
         alt: 'Cineon admin promotions and discounts dashboard',
         caption: 'Admin promotions and discounts',
       },
@@ -128,8 +136,7 @@ export const projects: Project[] = [
     },
     architecture: [
       { name: 'ReactJS frontend', description: 'Customer-facing and admin interfaces' },
-      { name: 'RESTful API', description: 'API integration between the frontend and backend' },
-      { name: 'Laravel backend', description: 'Application business logic and API flows' },
+      { name: 'Laravel backend', description: 'RESTful APIs and application business logic' },
       { name: 'MySQL database', description: 'Database operations for the application' },
     ],
     security: [

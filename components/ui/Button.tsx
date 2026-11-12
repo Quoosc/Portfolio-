@@ -6,7 +6,7 @@ import { scrollToSection } from '@/lib/utils';
 type Variant = 'primary' | 'secondary';
 
 const base =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50';
+  'motion-button inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50';
 
 const variants: Record<Variant, string> = {
   primary: 'bg-accent text-on-accent hover:bg-accent/90',
@@ -34,9 +34,9 @@ export function Button({ variant = 'primary', className = '', ...props }: Button
       <a
         href={href}
         onClick={(event: MouseEvent<HTMLAnchorElement>) => {
-          if (isSectionLink) {
+          if (isSectionLink && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
             event.preventDefault();
-            scrollToSection(href.slice(1));
+            scrollToSection(href.slice(1), { focus: event.detail === 0 });
           }
           onClick?.(event);
         }}

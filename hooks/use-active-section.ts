@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function useActiveSection(ids: readonly string[]) {
-  const [activeId, setActiveId] = useState(ids[0] ?? '');
+  const [activeId, setActiveId] = useState('');
+  const pathname = usePathname();
 
   useEffect(() => {
     let frame = 0;
@@ -11,21 +13,21 @@ export function useActiveSection(ids: readonly string[]) {
     function updateActiveSection() {
       frame = 0;
       const scrollPadding =
-        Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 80;
+        Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--section-offset')) || 80;
       const activationLine = window.scrollY + scrollPadding + 16;
-      let currentId = ids[0] ?? '';
+      let currentId = '';
 
       for (const id of ids) {
         const element = document.getElementById(id);
         if (!element) continue;
 
-        const scrollMargin = Number.parseFloat(getComputedStyle(element).scrollMarginTop) || 0;
-        const sectionTop = element.getBoundingClientRect().top + window.scrollY - scrollMargin;
+        const sectionTop = element.getBoundingClientRect().top + window.scrollY;
         if (sectionTop <= activationLine) currentId = id;
         else break;
       }
 
-      if (currentId) setActiveId(currentId);
+      if (pathname === '/' && window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) currentId = ids.at(-1) ?? currentId;
+      setActiveId(pathname === '/' ? currentId : '');
     }
 
     function scheduleUpdate() {
@@ -34,19 +36,22 @@ export function useActiveSection(ids: readonly string[]) {
     }
 
     scheduleUpdate();
+    const resizeObserver = new ResizeObserver(scheduleUpdate);
+    resizeObserver.observe(document.body);
     window.addEventListener('scroll', scheduleUpdate, { passive: true });
     window.addEventListener('resize', scheduleUpdate);
     window.addEventListener('hashchange', scheduleUpdate);
     window.addEventListener('popstate', scheduleUpdate);
 
     return () => {
+      resizeObserver.disconnect();
       window.removeEventListener('scroll', scheduleUpdate);
       window.removeEventListener('resize', scheduleUpdate);
       window.removeEventListener('hashchange', scheduleUpdate);
       window.removeEventListener('popstate', scheduleUpdate);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [ids]);
+  }, [ids, pathname]);
 
   return activeId;
 }

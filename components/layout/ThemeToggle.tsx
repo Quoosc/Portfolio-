@@ -10,7 +10,12 @@ export function ThemeToggle() {
 	return (
 		<button
 			type="button"
-			onClick={(e) => toggleTheme({ x: e.clientX, y: e.clientY })}
+			onClick={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        toggleTheme(e.detail === 0
+          ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+          : { x: e.clientX, y: e.clientY });
+      }}
 			aria-label={
 				isDark ? 'Switch to light theme' : 'Switch to dark theme'
 			}

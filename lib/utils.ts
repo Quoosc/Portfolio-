@@ -1,45 +1,59 @@
-function easeOutCubic(t: number) {
-  return 1 - (1 - t) ** 3;
-}
+let cancelCurrentScroll: (() => void) | undefined;
 
-/**
- * Scrolls to a section by id with a hand-rolled rAF animation instead of
- * native `scrollIntoView`/CSS `scroll-behavior: smooth` — those get their
- * animation silently cancelled on some Android Chrome / devtool device
- * emulation setups, leaving the page stuck in place despite the URL hash
- * changing. Duration scales with distance so short and long hops both feel
- * natural instead of using one fixed speed.
- */
-export function scrollToSection(id: string) {
-  const target = document.getElementById(id);
-  if (!target) return;
-
-  if (window.location.hash !== `#${id}`) {
-    window.history.pushState(null, '', `#${id}`);
+/** One cancellable scroll at a time; no nested native smooth scrolling. */
+export function scrollToSection(id: string, options: { focus?: boolean } = {}) {
+  cancelCurrentScroll?.();
+  const element = document.getElementById(id);
+  if (!element) return;
+  const target: HTMLElement = element;
+  if (window.location.hash !== `#${id}`) window.history.pushState(null, '', `#${id}`);
+  const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 80;
+  const start = window.scrollY;
+  const end = Math.max(0, Math.min(start + target.getBoundingClientRect().top - margin,
+    document.documentElement.scrollHeight - window.innerHeight));
+  const distance = end - start;
+  let frame = 0;
+  let startTime: number | undefined;
+  function cleanup() {
+    cancelAnimationFrame(frame);
+    window.removeEventListener('wheel', cancel);
+    window.removeEventListener('touchstart', cancel);
+    window.removeEventListener('keydown', onKeyDown);
+    if (cancelCurrentScroll === cancel) cancelCurrentScroll = undefined;
   }
-
-  const scrollMarginTop = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
-  const startY = window.scrollY;
-  const targetY = Math.max(0, startY + target.getBoundingClientRect().top - scrollMarginTop);
-  const distance = targetY - startY;
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion || distance === 0) {
-    window.scrollTo(0, targetY);
-    return;
+  function cancel() { cleanup(); }
+  function onKeyDown(event: KeyboardEvent) {
+    if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' ', 'Escape', 'Tab'].includes(event.key)) cancel();
   }
-
-  const duration = Math.min(1000, Math.max(400, Math.abs(distance) * 0.6));
-  let startTime: number | null = null;
-
-  function step(timestamp: number) {
-    if (startTime === null) startTime = timestamp;
-    const progress = Math.min((timestamp - startTime) / duration, 1);
-    window.scrollTo(0, startY + distance * easeOutCubic(progress));
-    if (progress < 1) {
-      requestAnimationFrame(step);
+  function finish() {
+    cleanup();
+    if (options.focus) {
+      const focusTarget = target.querySelector<HTMLElement>('h1, h2') ?? target;
+      const originalTabIndex = focusTarget.getAttribute('tabindex');
+      focusTarget.setAttribute('tabindex', '-1');
+      focusTarget.focus({ preventScroll: true });
+      focusTarget.addEventListener('blur', () => {
+        if (originalTabIndex === null) focusTarget.removeAttribute('tabindex');
+        else focusTarget.setAttribute('tabindex', originalTabIndex);
+      }, { once: true });
     }
   }
-
-  requestAnimationFrame(step);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || Math.abs(distance) < 1) {
+    window.scrollTo({ top: end, behavior: 'instant' });
+    finish();
+    return;
+  }
+  const duration = Math.min(850, Math.max(300, Math.abs(distance) * 0.4));
+  function step(time: number) {
+    startTime ??= time;
+    const progress = Math.min((time - startTime) / duration, 1);
+    window.scrollTo({ top: start + distance * (1 - (1 - progress) ** 3), behavior: 'instant' });
+    if (progress < 1) frame = requestAnimationFrame(step);
+    else finish();
+  }
+  cancelCurrentScroll = cancel;
+  window.addEventListener('wheel', cancel, { passive: true });
+  window.addEventListener('touchstart', cancel, { passive: true });
+  window.addEventListener('keydown', onKeyDown);
+  frame = requestAnimationFrame(step);
 }

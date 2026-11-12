@@ -26,12 +26,14 @@ export type Skill = {
 
 export type SkillCategory = {
   label: string;
+  description: string;
   skills: Skill[];
 };
 
 export const skillCategories: SkillCategory[] = [
   {
     label: 'Programming Languages',
+    description: 'JavaScript and PHP in Cineon; Python and TypeScript are also part of my programming foundation.',
     skills: [
       { name: 'Python', icon: SiPython, color: technologyColors.Python },
       { name: 'JavaScript', icon: SiJavascript, color: technologyColors.JavaScript },
@@ -41,6 +43,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     label: 'Frameworks & Database',
+    description: 'React, Laravel, Tailwind CSS, and MySQL in Cineon; Next.js in this portfolio.',
     skills: [
       { name: 'ReactJS', icon: SiReact, color: technologyColors.ReactJS },
       { name: 'Laravel', icon: SiLaravel, color: technologyColors.Laravel },
@@ -51,6 +54,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     label: 'Core Engineering',
+    description: 'Fundamentals behind structuring applications, solving problems, and connecting services.',
     skills: [
       { name: 'OOP', color: technologyColors.OOP },
       { name: 'Data Structures & Algorithms', color: technologyColors['Data Structures & Algorithms'] },
@@ -59,6 +63,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     label: 'AI & Development Tools',
+    description: 'Tools for requirement analysis, debugging, API inspection, and reviewing code during development.',
     skills: [
       { name: 'Claude', icon: SiClaude, color: technologyColors.Claude },
       { name: 'GitHub Copilot', icon: SiGithubcopilot, color: technologyColors['GitHub Copilot'] },

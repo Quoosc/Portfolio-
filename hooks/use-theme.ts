@@ -10,7 +10,7 @@ const THEME_TRANSITION_MS = 550;
 
 function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;
-  window.localStorage.setItem(STORAGE_KEY, theme);
+  try { window.localStorage.setItem(STORAGE_KEY, theme); } catch { /* Theme still works without storage. */ }
 }
 
 export function useTheme() {

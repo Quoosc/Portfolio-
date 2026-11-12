@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState, type MouseEvent } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import { AnimatePresence, motion, useIsPresent } from 'framer-motion';
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { usePathname } from 'next/navigation';
-import { ListIcon, X } from '@phosphor-icons/react';
 import { useActiveSection } from '@/hooks/use-active-section';
 import { siteConfig } from '@/lib/site-config';
 import { scrollToSection } from '@/lib/utils';
@@ -11,12 +11,31 @@ import { ThemeToggle } from './ThemeToggle';
 
 const sectionIds = siteConfig.navLinks.map((link) => link.href.replace('#', ''));
 
+function MobileMenu({ children }: { children: ReactNode }) {
+  const present = useIsPresent();
+  const reduceMotion = useReducedMotion();
+  return <motion.nav id="mobile-navigation" aria-label="Mobile navigation" inert={!present}
+    initial={reduceMotion ? false : { opacity: 0, y: -8 }}
+    animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
+    transition={{ duration: reduceMotion ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] }}
+    className="overflow-hidden border-t border-border/80 bg-background/95 backdrop-blur-xl lg:hidden">
+    {children}
+  </motion.nav>;
+}
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const activeId = useActiveSection(sectionIds);
   const shouldReduceMotion = useReducedMotion();
   const pathname = usePathname();
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const closeOnDesktop = () => { if (desktop.matches) setMenuOpen(false); };
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => desktop.removeEventListener('change', closeOnDesktop);
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -33,17 +52,17 @@ export function Header() {
   }, [menuOpen]);
 
   function handleNavClick(event: MouseEvent<HTMLAnchorElement>, id: string) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     if (pathname !== '/') {
       setMenuOpen(false);
       return;
     }
 
     event.preventDefault();
-    const wasMenuOpen = menuOpen;
+    const keyboard = event.detail === 0;
     setMenuOpen(false);
     requestAnimationFrame(() => {
-      scrollToSection(id);
-      if (wasMenuOpen) menuButtonRef.current?.focus({ preventScroll: true });
+      scrollToSection(id, { focus: keyboard });
     });
   }
 
@@ -70,9 +89,8 @@ export function Header() {
                     href={pathname === '/' ? link.href : `/${link.href}`}
                     onClick={(event) => handleNavClick(event, id)}
                     aria-current={isActive ? 'location' : undefined}
-                    style={isActive ? { borderColor: 'var(--nav-active-border)' } : undefined}
-                    className={`relative rounded-lg border border-transparent px-3.5 py-2 text-sm transition-colors duration-200 ${
-                      isActive ? 'bg-[var(--nav-active-bg)] text-text' : 'text-muted hover:text-text'
+                    className={`relative isolate inline-flex rounded-lg border border-transparent px-3.5 py-2 text-sm transition-colors duration-200 ${
+                      isActive ? 'text-text' : 'text-muted hover:text-text'
                     }`}
                   >
                     {link.label}
@@ -80,8 +98,8 @@ export function Header() {
                       <motion.span
                         aria-hidden="true"
                         layoutId="desktop-active-navigation-indicator"
-                        className="absolute inset-x-3 bottom-0 h-px bg-accent"
-                        transition={{ duration: 0.28, ease: 'easeInOut' }}
+                        className="pointer-events-none absolute -inset-px -z-10 rounded-lg border border-[var(--nav-active-border)] bg-[var(--nav-active-bg)]"
+                        transition={{ duration: shouldReduceMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
                       />
                     )}
                   </a>
@@ -102,22 +120,16 @@ export function Header() {
             aria-controls={menuOpen ? 'mobile-navigation' : undefined}
             className="flex size-11 items-center justify-center rounded-xl border border-border text-text transition-colors hover:border-accent/70 hover:text-accent lg:hidden"
           >
-            {menuOpen ? <X size={19} weight="bold" /> : <ListIcon size={19} weight="bold" />}
+            <span aria-hidden="true" className="menu-glyph" data-open={menuOpen}>
+              <span /><span /><span />
+            </span>
           </button>
         </div>
       </div>
 
       <AnimatePresence initial={false}>
         {menuOpen && (
-          <motion.nav
-            id="mobile-navigation"
-            aria-label="Mobile navigation"
-            initial={shouldReduceMotion ? false : { height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.18, ease: 'easeOut' }}
-            className="overflow-hidden border-t border-border/80 bg-background/95 backdrop-blur-xl lg:hidden"
-          >
+          <MobileMenu>
             <ul className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 sm:px-6">
               {siteConfig.navLinks.map((link) => {
                 const id = link.href.slice(1);
@@ -139,7 +151,7 @@ export function Header() {
                 );
               })}
             </ul>
-          </motion.nav>
+          </MobileMenu>
         )}
       </AnimatePresence>
     </header>

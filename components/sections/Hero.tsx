@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-6xl scroll-mt-20 items-center gap-12 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)] lg:gap-14 lg:py-20"
+      className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-6xl scroll-mt-20 items-center gap-8 px-4 py-10 sm:gap-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)] lg:gap-14 lg:py-20"
     >
       <div className="relative z-10 max-w-2xl">
         <FadeIn delay={0}>
@@ -25,29 +25,30 @@ export function Hero() {
         </FadeIn>
 
         <FadeIn delay={0.04}>
-          <h1 className="mt-6 text-balance font-display text-[clamp(2.75rem,5vw,4rem)] font-semibold leading-[1.04] tracking-[-0.055em] text-text">
-            Turning complex problems into practical software.
+          <h1 className="mt-6 text-balance font-display text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.04] tracking-[-0.055em] text-text max-sm:leading-[1.1]">
+            {siteConfig.profile.motto}
           </h1>
         </FadeIn>
 
         <FadeIn delay={0.08}>
           <p className="mt-6 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
-            I&apos;m {siteConfig.profile.fullName}, a Software Engineering student who enjoys
-            building full-stack web applications and exploring practical applications of AI.
+            I&apos;m {siteConfig.profile.fullName}, a Software Engineering student at UIT,
+            focused on practical web development and exploring Applied AI.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.12}>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="#projects">
+            <Button href="#projects" className="max-sm:px-4 max-sm:text-[13px]">
               Explore Projects
               <ArrowDownIcon size={16} weight="bold" />
             </Button>
             <Button
-              href="/pham-tran-quoc-cv.pdf"
+              href={siteConfig.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               variant="secondary"
+              className="max-sm:px-4 max-sm:text-[13px]"
             >
               View Resume
               <ArrowUpRightIcon size={16} weight="bold" />
@@ -79,7 +80,7 @@ export function Hero() {
         </FadeIn>
       </div>
 
-      <FadeIn delay={0.1} className="mx-auto w-full max-w-[25rem] lg:ml-auto">
+      <FadeIn delay={0.1} className="mx-auto w-full max-w-[18rem] sm:max-w-[22rem] lg:max-w-[25rem] lg:ml-auto">
         <figure className="relative">
           <div aria-hidden="true" className="absolute -right-3 -top-3 size-24 rounded-tr-3xl border-r border-t border-accent/60" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[1.4rem] border border-border bg-surface shadow-[0_24px_64px_rgba(0,0,0,0.2)]">
@@ -88,7 +89,7 @@ export function Hero() {
               alt="Pham Tran Quoc"
               fill
               preload
-              sizes="(min-width: 1024px) 400px, (min-width: 640px) 70vw, 92vw"
+              sizes="(min-width: 1024px) 400px, (min-width: 640px) 352px, 288px"
               className="object-cover object-[center_30%]"
             />
           </div>

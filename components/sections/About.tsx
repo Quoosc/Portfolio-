@@ -11,19 +11,20 @@ export function About() {
           <FadeIn>
             <SectionHeading
               eyebrow="About"
-              title="A software engineering student who enjoys making useful things."
+              title="How I approach software development."
             />
           </FadeIn>
           <FadeIn delay={0.05}>
             <div className="mt-6 max-w-2xl space-y-4 text-base leading-7 text-muted sm:text-lg sm:leading-8">
               <p>
-                I&apos;m studying {siteConfig.profile.major} at {siteConfig.profile.university}.
-                Building full-stack applications has helped me connect software fundamentals with
-                practical product work.
+                I enjoy connecting user-facing workflows with backend logic—from choosing
+                a movie to completing a booking. Cineon gave me practical experience
+                bringing a React interface, Laravel APIs, and MySQL together.
               </p>
               <p>
-                I&apos;m interested in full-stack development and practical applications of AI, and
-                continue to build my technical foundation through project work and study.
+                My contributions include temporary seat reservations, API integration, and
+                booking and payment workflows. I use project work to connect software
+                engineering fundamentals with the details of a working application.
               </p>
             </div>
           </FadeIn>

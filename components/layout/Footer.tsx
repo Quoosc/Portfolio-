@@ -12,9 +12,9 @@ export function Footer() {
   const pathname = usePathname();
 
   function goHome(event: MouseEvent<HTMLAnchorElement>) {
-    if (pathname !== '/') return;
+    if (pathname !== '/' || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    scrollToSection('home');
+    scrollToSection('home', { focus: event.detail === 0 });
   }
 
   return (
@@ -30,6 +30,7 @@ export function Footer() {
           </a>
           <p className="mt-1 text-xs text-muted">
             © {year} {siteConfig.profile.fullName}
+            <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" className="ml-3 inline-flex min-h-8 items-center rounded text-accent underline underline-offset-4">Resume ↗</a>
           </p>
         </div>
 

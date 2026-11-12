@@ -5,6 +5,7 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from '@phosphor-icons/react/dist/ssr';
+import { CopyEmail } from '@/components/ui/CopyEmail';
 import { FadeIn } from '@/components/ui/FadeIn';
 import { siteConfig } from '@/lib/site-config';
 
@@ -26,14 +27,18 @@ export function Contact() {
               </p>
             </div>
 
+            <div className="flex flex-col items-start gap-3">
             <a
               href={`mailto:${siteConfig.socialLinks.email}`}
               className="inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <EnvelopeSimpleIcon size={17} weight="bold" aria-hidden="true" />
-              Get in Touch
+              Email Me
               <ArrowUpRightIcon size={16} weight="bold" aria-hidden="true" />
             </a>
+            <CopyEmail email={siteConfig.socialLinks.email} />
+            <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded-lg text-sm text-accent underline underline-offset-4">View Resume ↗</a>
+            </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-4 border-t border-border pt-5 text-sm lg:col-span-2">
               <a

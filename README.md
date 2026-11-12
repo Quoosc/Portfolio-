@@ -58,3 +58,41 @@ GPA: **3.35/4.0**
 - **Portfolio:** [quoc-portfolio-roan.vercel.app](https://quoc-portfolio-roan.vercel.app/)
 - **Resume:** [View or download PDF](https://quoc-portfolio-roan.vercel.app/pham-tran-quoc-cv.pdf)
 - **Location:** Ho Chi Minh City, Vietnam
+
+## Product Preview
+
+[![Cineon seat selection](public/cineon/screenshots/04-seat-selection.webp)](https://quoc-portfolio-roan.vercel.app/projects/cineon)
+
+[Explore the Cineon case study](https://quoc-portfolio-roan.vercel.app/projects/cineon).
+The portfolio includes a customer-to-admin product tour, a keyboard-accessible screenshot viewer, circular dark/light theme transitions, and responsive navigation.
+
+## Local Development
+
+```sh
+npm ci
+npm run dev
+```
+
+Open http://localhost:3000. Validate changes with:
+
+```sh
+npm run lint
+npm run typecheck
+npm run build
+npm run start
+```
+
+## Content and Assets
+
+- Personal information, portfolio domain, and resume URL: `lib/site-config.ts`.
+- Cineon copy, links, and screenshot order: `data/projects.ts`.
+- Skills and theme-aware colors: `data/skills.ts` and `data/technology-colors.ts`.
+- Original PNGs, optimized WebP images, and thumbnails: `public/cineon/screenshots/`.
+- Resume: `public/pham-tran-quoc-cv.pdf`.
+
+For a new screenshot, add `src`, `thumbnail`, `alt`, and `caption` to the project data. Use descriptive English captions and public-demo booking data.
+
+Contact uses email links and a Copy Email button. No email service credentials are needed.
+SEO includes per-page metadata, a Cineon social image, sitemap, robots, and Person structured data. Set `siteConfig.url` when changing the portfolio domain.
+
+The case study links to a reviewed backend revision for the reservation flow: expiring per-seat Redis locks and transaction-backed reservation records. The default 10-minute hold is configurable; no measured performance or production concurrency guarantees are claimed.

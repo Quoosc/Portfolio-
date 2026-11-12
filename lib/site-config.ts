@@ -1,4 +1,6 @@
 export const siteConfig = {
+  url: 'https://quoc-portfolio-roan.vercel.app',
+  resumeUrl: '/pham-tran-quoc-cv.pdf',
   name: 'Pham Tran Quoc',
   navLinks: [
     { label: 'Work', href: '#projects' },
@@ -20,6 +22,6 @@ export const siteConfig = {
     major: 'Software Engineering',
     gpa: '3.35/4.0',
     educationPeriod: 'September 2023 – June 2027 (Expected)',
-    motto: 'Turning complex problems into practical software.',
+    motto: 'Building full-stack web applications with React and Laravel.',
   },
 } as const;

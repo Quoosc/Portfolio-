@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { siteConfig } from '@/lib/site-config';
 import './globals.css';
 
 const geist = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
@@ -12,7 +13,7 @@ const description =
   'Pham Tran Quoc is a Software Engineering student at UIT, focused on full-stack development and exploring practical applications of Applied AI.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://quoc-portfolio-roan.vercel.app'),
+  metadataBase: new URL(siteConfig.url),
   title,
   description,
   alternates: { canonical: '/' },
@@ -61,8 +62,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-full flex-col">
+        <a className="skip-link" href="#main-content">Skip to content</a>
         <Header />
-        <main className="flex-1 pt-[4.5rem]">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 pt-[4.5rem]">{children}</main>
         <Footer />
       </body>
     </html>

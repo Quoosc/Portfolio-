@@ -1,6 +1,7 @@
+import { siteConfig } from '@/lib/site-config';
 import type { MetadataRoute } from 'next';
 
-const baseUrl = 'https://quoc-portfolio-roan.vercel.app';
+const baseUrl = siteConfig.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

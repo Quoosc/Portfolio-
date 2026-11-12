@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { siteConfig } from '@/lib/site-config';
 
 export const alt = 'Pham Tran Quoc — Software Engineering Student';
 export const size = { width: 1200, height: 630 };
@@ -45,7 +46,7 @@ export default function OpenGraphImage() {
               letterSpacing: '-3px',
             }}
           >
-            Turning complex problems into practical software.
+            {siteConfig.profile.motto}
           </span>
           <span style={{ marginTop: '22px', color: '#B0BDCE', fontSize: '24px' }}>
             Full-stack development · Applied AI
